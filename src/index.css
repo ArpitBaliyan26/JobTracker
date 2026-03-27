@@ -1,13 +1,119 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* index.css – Global styles and CSS custom properties for the entire app */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ─── CSS Variables (Design Tokens) ──────────────────────────────────── */
+:root {
+  /* Default Light Theme – clean SaaS white */
+  --bg-primary: #f9fafb;          /* Soft off-white page background */
+  --bg-secondary: #ffffff;        /* Pure white for sidebar/navbar */
+  --bg-card: #ffffff;             /* Pure white cards for contrast */
+  --bg-hover: #f1f5f9;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-light: rgba(79, 70, 229, 0.08);
+  --text-primary: #111827;        /* Near-black for max readability */
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;              /* Crisper light border */
+  --border-light: rgba(0, 0, 0, 0.06);
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --teal: #06b6d4;
+  --sidebar-width: 240px;
+  --navbar-height: 64px;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);      /* Visible card shadow */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);     /* Subtle lift */
+  --transition: 0.2s ease;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Dark Theme Overrides */
+.dark {
+  color-scheme: dark; /* Forces native browser components (calendar, scrollbars) to dark mode */
+  
+  /* Deep SaaS Palette (Zinc/Notion style) */
+  --bg-primary: #09090b;   /* Very deep space gray */
+  --bg-secondary: #111113; /* Slightly lifted header/sidebar */
+  --bg-card: #18181b;      /* High contrast cards */
+  --bg-hover: #27272a;     /* Hover state */
+  
+  --accent: #818cf8;       /* Softer indigo */
+  --accent-hover: #6366f1;
+  --accent-light: rgba(129, 140, 248, 0.15);
+  
+  --text-primary: #f8fafc; /* Crisp white for headings */
+  --text-secondary: #cbd5e1; /* Soft gray for body */
+  --text-muted: #94a3b8;   /* Muted gray for meta info */
+  
+  --border: #27272a;       /* Subtle dark borders */
+  --border-light: rgba(255, 255, 255, 0.04);
+  
+  /* Softened Status Colors for Dark Mode */
+  --success: #34d399;      /* Emerald 400 */
+  --warning: #fbbf24;      /* Amber 400 */
+  --danger: #f87171;       /* Red 400 */
+  --info: #60a5fa;         /* Blue 400 */
+  --teal: #22d3ee;         /* Cyan 400 */
+  
+  /* Deeper, more realistic Shadows */
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
+
+/* ─── Reset & Base ────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}
+
+/* ─── Utility Classes ────────────────────────────────────────────────── */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 8px; }
+.gap-2 { gap: 16px; }
+.text-muted { color: var(--text-secondary); }
+.text-sm { font-size: 12px; }
+.font-semibold { font-weight: 600; }
+.w-full { width: 100%; }
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }

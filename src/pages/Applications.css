@@ -1,0 +1,141 @@
+/* Applications.css - New Clean Desktop SaaS Styling */
+
+.applications-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header Row (Search & Filters) */
+.apps-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 16px;
+  height: 44px;
+  flex: 1;
+  max-width: 480px;
+  transition: border-color 0.2s;
+}
+
+.search-container:focus-within {
+  border-color: var(--accent);
+}
+
+.search-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.search-input-sleek {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  min-width: 0; /* prevents flex overflow */
+}
+
+.search-input-sleek::placeholder {
+  color: var(--text-muted);
+}
+
+/* Filters */
+.filter-dropdowns {
+  display: flex;
+  gap: 12px;
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sleek-select {
+  appearance: none;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  height: 44px;
+  padding: 0 36px 0 38px; /* space for left icon and default right arrow */
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  min-width: 140px;
+}
+
+/* Second dropdown might not have an icon */
+.select-wrapper:nth-child(2) .sleek-select {
+  padding-left: 16px;
+}
+
+.sleek-select:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+/* Minimal Text Tabs */
+.pipeline-tabs-text {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.pipeline-tabs-text::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0 0 8px 0;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.tab-btn:hover {
+  color: var(--text-secondary);
+}
+
+.tab-btn.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Grid Layout */
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}

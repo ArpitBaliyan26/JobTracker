@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Smart Job Tracker Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, SaaS-style React application designed to help students and professionals track their job search journey. Built for a college React course submission, this dashboard replaces messy spreadsheets with a structured, visual, and highly interactive tracking system.
 
-## Available Scripts
+## 🎯 Problem Statement
+Tracking job applications using Excel or Notion often becomes chaotic:
+- It's hard to visualize the pipeline (what's stuck in "Interview" vs "Applied").
+- Lack of analytics to see which platforms yield the best results.
+- Easy to miss deadlines or forget to follow up after an interview.
+- No systematic way to sort by priority, salary, or application dates.
 
-In the project directory, you can run:
+## ✨ Solution
+The **Smart Job Tracker Dashboard** provides a structured workflow with a clean, responsive UI. It enforces logical date tracking (you can't schedule an interview before you've applied) while remaining flexible enough for future planning. 
 
-### `npm start`
+## 🚀 Key Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Application Pipeline:** Track jobs across 6 logical stages (To Apply → Applied → Interview → Waiting → Offer / Rejected).
+- **Smart Validation:** Date logic that understands real-world flows. Hard errors block impossible dates (e.g., offer before interview), while soft yellow warnings allow future planning.
+- **Advanced Sorting & Filtering:** Sort by pipeline-aware metrics like Deadline, Salary, Priority, and Application Date. Filter by status via quick-access tabs.
+- **Analytics Dashboard:** Visual representation of your job hunt using Recharts (includes Pie charts for status/priority, and customized Platform bar charts with hover % insights).
+- **Suggested Jobs Integration:** Fetches real mock data via Axios from a dummy API, with 1-click pre-fill application functionality.
+- **Dynamic Bookmarking:** Pin high-priority roles directly to your dashboard.
+- **Dynamic Seed Data:** A "Reset Data" feature that generates realistic, mathematically randomized mock data for testing.
+- **Theming:** Full Light, Dark, and System theme support using CSS variables.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Technical Implementation
 
-### `npm test`
+- **Library:** React (Functional Components)
+- **State Management:** Custom Context API (`ApplicationContext`, `ThemeContext`) & custom hooks (`useLocalStorage`, `useApplications`).
+- **Routing:** `react-router-dom` for SPA navigation.
+- **Forms & Validation:** `react-hook-form` + `yup` for performant, schema-driven validation.
+- **API Requests:** `axios` for fetching suggested jobs.
+- **Data Visualization:** `recharts` for highly customized SVG charts.
+- **Styling:** Vanilla CSS with a strong emphasis on modern SaaS design tokens (CSS variables) for seamless theming and maintainability.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 💡 Key Design & Architecture Decisions (Viva Notes)
 
-### `npm run build`
+1. **Why Context API over Redux?** 
+   For a project of this scale, Context API combined with custom hooks provides perfect state separation without the heavy boilerplate of Redux.
+2. **Why Vanilla CSS + Variables?** 
+   To demonstrate a deep understanding of CSS fundamentals. Using `--bg-card` and `--text-primary` tokens allows the entire app to switch themes instantly without re-rendering components.
+3. **Company Logo Rendering:** 
+   Instead of unreliable fallback images, the app uses a custom `helpers.js` utility that maps company names to domains and fetches high-resolution 128px icons via the Google Favicon API.
+4. **Separation of Concerns:** 
+   Validation logic is strictly separated into `validationSchema.js`. API calls are isolated in `services/jobService.js`. Data management lives in `useApplications.js`. This makes the codebase highly maintainable.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 💻 How to Run
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Install dependencies:**
+    ```bash
+    npm install
+    ```
+2. **Start the development server:**
+    ```bash
+    npm start
+    ```
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🔮 Future Improvements
+- **Real API Backend:** Replace `localStorage` with a Node.js/Express + MongoDB backend.
+- **Authentication:** Add JWT-based login to support multiple users.
+- **Email Reminders:** Integration with an email service to send follow-up reminders 3 days after an interview.

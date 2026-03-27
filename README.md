@@ -55,8 +55,3 @@ The **Smart Job Tracker Dashboard** provides a structured workflow with a clean,
     npm start
     ```
 3. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## 🔮 Future Improvements
-- **Real API Backend:** Replace `localStorage` with a Node.js/Express + MongoDB backend.
-- **Authentication:** Add JWT-based login to support multiple users.
-- **Email Reminders:** Integration with an email service to send follow-up reminders 3 days after an interview.

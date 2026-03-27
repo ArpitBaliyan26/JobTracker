@@ -1,10 +1,9 @@
 // Applications.jsx – Main list page with search, filter, sort, and pipeline tabs.
 // FIX: Added priority and deadline sort options.
 // FIX: Bookmarks tab now filters to show ONLY bookmarked applications.
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppContext } from '../context/ApplicationContext';
-import useDebounce from '../hooks/useDebounce';
 import JobCard from '../components/JobCard';
 import EmptyState from '../components/EmptyState';
 import { getPriorityOrder, PLATFORM_OPTIONS } from '../utils/constants';
@@ -18,12 +17,18 @@ function Applications() {
   const isBookmarksView = new URLSearchParams(location.search).get('tab') === 'bookmarks';
 
   const [searchInput, setSearchInput]   = useState('');
+  const [searchQuery, setSearchQuery]   = useState('');
   const [activeTab, setActiveTab]       = useState('All');
   const [filters, setFilters]           = useState({ status: '', platform: '', location: '' });
   const [sortBy, setSortBy]             = useState('appliedDate_desc');
 
-  // Debounce the search query so we don't re-filter on every keystroke
-  const searchQuery = useDebounce(searchInput, 400);
+  // Debounce the search input directly using useEffect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchQuery(searchInput);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
 
   // ── Derive visible list (useMemo = only recompute when dependencies change) ──
   const visibleApps = useMemo(() => {

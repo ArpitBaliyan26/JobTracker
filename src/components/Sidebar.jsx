@@ -1,6 +1,6 @@
 // Sidebar.jsx – Left navigation panel with links to all pages
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
 // Navigation items: icon (emoji), label, and route path
@@ -11,6 +11,9 @@ const NAV_ITEMS = [
 ];
 
 function Sidebar() {
+  const location = useLocation();
+  const isBookmarksActive = location.pathname === '/applications' && location.search.includes('tab=bookmarks');
+
   return (
     <aside className="sidebar">
       {/* Brand / Logo */}
@@ -26,29 +29,31 @@ function Sidebar() {
       <nav className="sidebar-nav">
         <div className="nav-section-label">Main Menu</div>
 
-        {NAV_ITEMS.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              isActive ? 'sidebar-link active' : 'sidebar-link'
-            }
-          >
-            <span className="nav-icon">{item.icon}</span>
-            {item.label}
-          </NavLink>
-        ))}
+        {NAV_ITEMS.map((item) => {
+          // If it's the generic applications route, it's only active if bookmarks is NOT active
+          const isItemActive = location.pathname === item.path && !(item.path === '/applications' && isBookmarksActive);
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`sidebar-link ${isItemActive ? 'active' : ''}`}
+            >
+              <span className="nav-icon">{item.icon}</span>
+              {item.label}
+            </Link>
+          );
+        })}
 
         <div className="nav-section-label">Quick Actions</div>
 
         {/* Bookmarks link styled as a nav item */}
-        <NavLink
+        <Link
           to="/applications?tab=bookmarks"
-          className="sidebar-link"
+          className={`sidebar-link ${isBookmarksActive ? 'active' : ''}`}
         >
           <span className="nav-icon">🔖</span>
           Bookmarks
-        </NavLink>
+        </Link>
       </nav>
 
       {/* Add new application button at the bottom */}
